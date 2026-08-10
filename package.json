@@ -1,0 +1,16 @@
+{
+  "name": "filedrop-discord-bridge",
+  "version": "1.0.0",
+  "description": "Bot Discord qui relie le chat Discord et le chat du site FileDrop via Supabase",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "@supabase/supabase-js": "^2.45.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
