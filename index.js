@@ -50,10 +50,18 @@ client.on(Events.MessageCreate, async (message) => {
   if (message.author.bot) return;
   if (message.channelId !== DISCORD_CHANNEL_ID) return;
 
+  // Récupère les liens des images/fichiers joints, s'il y en a
+  const attachmentUrls = message.attachments.map(a => a.url).join(' ');
+  let text = message.content || '';
+  if (attachmentUrls) {
+    text = text ? (text + ' ' + attachmentUrls) : attachmentUrls;
+  }
+  if (!text) text = '(message vide)';
+
   const { error } = await supabase.from('bridge_messages').insert({
     source: 'discord',
     author: message.author.username,
-    text: message.content || '(message sans texte, ex: image/fichier)'
+    text: text
   });
 
   if (error) console.error('Erreur insertion Supabase :', error.message);
